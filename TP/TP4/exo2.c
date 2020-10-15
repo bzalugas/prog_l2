@@ -15,7 +15,7 @@ int main(void)
   printf("\n\n");
   printf("*****\tAffichage du tableau initial\t******\n\nvecteur t:\t");
   for(i = 0; i < nb; i++)
-      printf("\t%d", t[i]);
+    printf("\t%d", t[i]);
   for(i = 0, j = nb-1; i < j; i++, j--)
     {
       tmp = t[i];
@@ -24,6 +24,6 @@ int main(void)
     }
   printf("\n\n******\tAffichage du tableau après inversion\t******\n\nvecteur t inversé:");
   for(i = 0; i < nb; i++)
-      printf("\t%d", t[i]);
+    printf("\t%d", t[i]);
   printf("\n");
 }
