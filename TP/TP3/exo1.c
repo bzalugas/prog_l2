@@ -9,7 +9,9 @@ int main(void)
   int *pInt = &x;
   printf("Après définition et initialisation de pInt\n");
   printf("adresse de pInt: %p, contenu de pInt: %p, valeur de la case pointée par pInt: %d\n", &pInt, pInt, *pInt);
-  int *ptrInt = malloc(sizeof(int));
+  int *ptrInt;
+  if (!(ptrInt = (int *) malloc(sizeof(int))))
+    printf("Erreur d'allocation mémoire.\n");
   *ptrInt = 100;
   printf("Après allocation et initialisation de ptrInt\n");
   printf("adresse de ptrInt: %p, contenu de ptrInt: %p, valeur de la case pointée par ptrInt: %d\n", &ptrInt, ptrInt, *ptrInt);
