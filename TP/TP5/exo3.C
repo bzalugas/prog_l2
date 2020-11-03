@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 void min_max(int x, int y, int z, int *min, int *max)
 {
@@ -15,14 +14,16 @@ void min_max(int x, int y, int z, int *min, int *max)
         *max = z;
 }
 
-int main(int ac, char **av)
+int main(void)
 {
     int x,y,z,min, max;
-    (void)ac;
 
-    x = atoi(av[1]);
-    y = atoi(av[2]);
-    z = atoi(av[3]);
+    printf("valeur 1 : ");
+    scanf("%d", &x);
+    printf("valeur 2 : ");
+    scanf("%d", &y);
+    printf("valeur 3 : ");
+    scanf("%d", &z);
     min_max(x,y,z,&min,&max);
     printf("min = %d, max = %d\n", min, max);
     return (0);

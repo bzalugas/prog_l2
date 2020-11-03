@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 
 int mult_2(int nb)
