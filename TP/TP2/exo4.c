@@ -5,8 +5,8 @@ int main()
     float somme;
     printf("Somme ? ");
     scanf("%f", &somme);
-    somme*=100;
-    if (!((int)somme/50000 == 0))
+    somme*=100; // on multiplie par 100 pour pouvoir calculer au centime près sans avoir de virgule
+    if (!((int)somme/50000 == 0)) //à chaque fois on vérifie que le rang n’est pas égal à 0 pour faire + propre
         printf("billets de 500€ : %d\n", (int)somme/50000);
     somme=(int)somme%50000;
     if (!((int)somme/10000 == 0))
