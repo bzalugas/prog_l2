@@ -135,4 +135,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+#Document trop volumineux
+corrections_td_tp.docx
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,emacs,c
