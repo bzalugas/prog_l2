@@ -6,45 +6,40 @@
 #define EMPLOYE_MAX 5
 
 typedef struct date {
-    unsigned int    jour;
-    unsigned int    mois;
-    int             annee;
+    char    jour[3];
+    char    mois[3];
+    char    annee[5];
 } date;
 
 typedef struct employe {
     char    nom[NOM_MAX];
-    date    date_embauche;
-    date    date_poste;
+    date    dte_emb;
+    date    dte_pste;
 } employe;
-/*
-char *read_str(void)
+
+void    read_str(char *str)
 {
-    char *str;
     char buffer[NOM_MAX];
     fgets(buffer, NOM_MAX, stdin);
-    if (!(str = (char *) malloc(sizeof(char) * (strlen(buffer)+1))))
-        {
-            printf("erreur allocation mémoire");
-            exit (0);
-        }
+    //suppression du \n
+    if (strlen(buffer) < NOM_MAX)
+        buffer[strlen(buffer) - 1] = '\0';
     strcpy(str, buffer);
-    return (str);
-} */
+}
 
 void    saisie(employe *p)
 {
     char rep;
     fflush(stdin);
     printf("Nom : ");
-/*    char *nom = read_str();
-    if (strlen(nom) < NOM_MAX)
-        nom[strlen(nom) - 1] = '\0';
-    strcpy(p->nom, nom);
-    free(nom); */
-    scanf("%s", p->nom);
+    read_str(p->nom);
+//    scanf("%s", p->nom);
     fflush(stdin);
-    printf("Date embauche (jj mm aa) : ");
-    scanf("%u %u %d", &p->date_embauche.jour,&p->date_embauche.mois,&p->date_embauche.annee);
+    printf("Date embauche (jj mm aaaa) : ");
+    scanf("%c%c %c%c %c%c%c%c", &p->dte_emb.jour[0],&p->dte_emb.jour[1],&p->dte_emb.mois[0],&p->dte_emb.mois[1],&p->dte_emb.annee[0],&p->dte_emb.annee[1],&p->dte_emb.annee[2],&p->dte_emb.annee[3]);
+    p->dte_emb.jour[2] = '\0';
+    p->dte_emb.mois[2] = '\0';
+    p->dte_emb.annee[4] = '\0';
     do
         {
             fflush(stdin);
@@ -53,12 +48,12 @@ void    saisie(employe *p)
             switch(rep)
                 {
                 case 'O':case'o':
-                    p->date_poste = p->date_embauche;
+                    p->dte_pste = p->dte_emb;
                     break;
                 case 'N':case'n':
                     printf("Date poste (jj mm aa) : ");
                     fflush(stdin);
-                    scanf("%u %u %d", &p->date_poste.jour,&p->date_poste.mois,&p->date_poste.annee);
+                    scanf("%c%c %c%c %c%c%c%c", &p->dte_pste.jour[0],&p->dte_pste.jour[1],&p->dte_pste.mois[0],&p->dte_pste.mois[1],&p->dte_pste.annee[0],&p->dte_pste.annee[1],&p->dte_pste.annee[2],&p->dte_pste.annee[3]);
                     break;
                 }
         } while (rep != 'o' && rep != 'O' && rep != 'n' && rep != 'N');
@@ -67,8 +62,8 @@ void    saisie(employe *p)
 void    affichage(employe p)
 {
     printf("Nom : %s\n", p.nom);
-    printf("Date embauche : %d %d %d\n", p.date_embauche.jour,p.date_embauche.mois,p.date_embauche.annee);
-    printf("Date poste : %d %d %d\n", p.date_poste.jour,p.date_poste.mois,p.date_poste.annee);
+    printf("Date embauche : %s %s %s\n", p.dte_emb.jour,p.dte_emb.mois,p.dte_emb.annee);
+    printf("Date poste : %s %s %s\n", p.dte_pste.jour,p.dte_pste.mois,p.dte_pste.annee);
 }
 
 int     main(void)
