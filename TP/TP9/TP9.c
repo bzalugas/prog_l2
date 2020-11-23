@@ -3,10 +3,7 @@
 #include <string.h>
 
 #define EMP_MAX 100 //nb max d'employés ds la société
-#define MAXIMUM 42 //max pour le buffer de read_str
-#define MAX_NOM 32 //à chaque fois max désiré +2 pour supprimer \n mais laisser assez de place
-#define MAX_RUE 42
-#define MAX_LOCAL 32
+#define NOM 32 //à chaque fois max désiré +2 pour supprimer \n mais laisser assez de place
 #define C_POSTAL 7
 
 int total = 0; //variable globale pour connaitre le nb d'employés déjà entrés
@@ -18,27 +15,34 @@ typedef enum situation {
     incorporable
 } situation;
 
+typedef enum sexe {
+    M,
+    F
+} sexe;
+
+typedef char nom[NOM];
+
 typedef struct adresse {
     int num_rue;
-    char nom_rue[MAX_RUE];
+    nom nom_rue;
     char code_postal[C_POSTAL];
-    char localite[MAX_LOCAL];
+    nom localite;
 } adresse;
 
 typedef struct employe {
-    char nom[MAX_NOM];
-    char prenom[MAX_NOM];
+    nom nom;
+    nom prenom;
     adresse adr_emp;
-    char sexe;
+    sexe s;
     union info_supp {
         situation sit_m;
-        char nom_j_f[MAX_NOM];
+        nom nom_j_f;
     } info_supp;
 } employe;
 
 void    read_str(char *str, int max)
 {
-    char buf[MAXIMUM];
+    char buf[NOM];
     int len;
 
     fflush(stdin);
@@ -70,11 +74,11 @@ void    saisieFiche(employe *p)
 {
     fflush(stdin);
     printf("Nom : ");
-    read_str(p->nom, MAX_NOM);
+    read_str(p->nom, NOM);
 
     fflush(stdin);
     printf("Prénom : ");
-    read_str(p->prenom, MAX_NOM);
+    read_str(p->prenom, NOM);
 
     fflush(stdin);
     printf("Adresse : \n");
@@ -82,22 +86,22 @@ void    saisieFiche(employe *p)
     scanf("%d", &p->adr_emp.num_rue);
     fflush(stdin);
     printf("\tNom de rue : ");
-    read_str(p->adr_emp.nom_rue, MAX_RUE);
+    read_str(p->adr_emp.nom_rue, NOM);
     fflush(stdin);
     printf("\tCode postal : ");
     read_str(p->adr_emp.code_postal, C_POSTAL);
     fflush(stdin);
     printf("\tLocalité : ");
-    read_str(p->adr_emp.localite, MAX_LOCAL);
+    read_str(p->adr_emp.localite, NOM);
 
     do
         {
             fflush(stdin);
-            printf("Sexe (H/F) : ");
-            scanf("%c", &p->sexe);
-            switch(p->sexe)
+            printf("Sexe (Masculin = 0 / Féminin = 1) : ");
+            scanf("%d", &p->s);
+            switch(p->s)
                 {
-                case 'H':case 'h':
+                case M:
                     do
                         {
                             fflush(stdin);
@@ -105,17 +109,17 @@ void    saisieFiche(employe *p)
                             scanf("%u", &p->info_supp.sit_m);
                         } while (p->info_supp.sit_m < 0 && p->info_supp.sit_m > 3);
                     break;
-                case 'F':case 'f':
+                case F:
                     fflush(stdin);
                     printf("Nom de jeune fille : ");
-                    read_str(p->info_supp.nom_j_f, MAX_NOM);
+                    read_str(p->info_supp.nom_j_f, NOM);
                     break;
                 default:
-                    printf("%c n'est pas un choix valide.\n", p->sexe);
-                    p->sexe = '0';
+                    printf("%d n'est pas un choix valide.\n", p->s);
+                    p->s = 2;
                     break;
                 }
-        } while (p->sexe == '0');
+        } while (p->s == 2);
 }
 
 void    afficheFiche(employe p)
@@ -126,14 +130,17 @@ void    afficheFiche(employe p)
 
     printf("\tAdresse : %d %s, %s, %s\n", p.adr_emp.num_rue,p.adr_emp.nom_rue,p.adr_emp.code_postal,p.adr_emp.localite);
 
-    printf("\tSexe : %c\n", p.sexe);
+    printf("\tSexe : ");
 
-    switch (p.sexe)
+
+    switch (p.s)
         {
-        case 'H':case 'h':
+        case M:
+            printf("Masculin\n");
             printf("\tSituation militaire : %s\n", convertSituation(p.info_supp.sit_m));
             break;
-        case 'F':case 'f':
+        case F:
+            printf("Féminin\n");
             printf("\tNom de jeune fille : %s\n", p.info_supp.nom_j_f);
             break;
         }
