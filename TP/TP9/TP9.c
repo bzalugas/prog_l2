@@ -43,7 +43,7 @@ typedef struct employe {
 void    read_str(char *str, int max)
 {
     char buf[NOM];
-    int len;
+    unsigned int len;
 
     fflush(stdin);
     fgets(buf, max, stdin);
@@ -107,7 +107,7 @@ void    saisieFiche(employe *p)
                             fflush(stdin);
                             printf("Situation militaire (libéré=0, exempté=1, réformé=2, incorporable=3) : ");
                             scanf("%u", &p->info_supp.sit_m);
-                        } while (p->info_supp.sit_m < 0 && p->info_supp.sit_m > 3);
+                        } while (p->info_supp.sit_m < 0 || p->info_supp.sit_m > 3);
                     break;
                 case F:
                     fflush(stdin);

@@ -1,0 +1,35 @@
+Structures de données :
+
+typedef enum sit_militaire {
+	Libere,
+	Exempte,
+	Reforme,
+	Incorporable
+} sit_militaire;
+
+typedef enum sexe {
+	Masculin,
+	Feminin
+} sexe;
+
+typedef nom char nom[MAX];
+
+typedef struct adresse {
+	int num_rue;
+	char nom_rue[MAX_RUE];
+	char code_postal[5];
+	char localite[MAX_LOCAL];
+} adresse;
+
+union info_supp {
+		sit_militaire militaire;
+		char nom_j_fille[MAX_NOM];
+	} info_supp;
+
+typedef struct employe {
+	char nom[MAX_NOM];
+	char prenom[MAX_NOM];
+	adresse adr_emp;
+	sexe s;
+	info_supp comp;
+} employe;
