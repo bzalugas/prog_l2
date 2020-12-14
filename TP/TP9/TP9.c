@@ -6,7 +6,7 @@
 #define NOM 32 //à chaque fois max désiré +2 pour supprimer \n mais laisser assez de place
 #define C_POSTAL 7
 
-int total = 0; //variable globale pour connaitre le nb d'employés déjà entrés
+int total = 0;//variable globale pour connaitre le nb d'employés déjà entrés
 
 typedef enum situation {
     libere,
@@ -40,7 +40,7 @@ typedef struct employe {
     } info_supp;
 } employe;
 
-void    read_str(char *str, int max)
+void    read_str(char *str, unsigned int max)
 {
     char buf[NOM];
     unsigned int len;
