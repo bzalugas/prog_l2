@@ -71,19 +71,14 @@ void    insererFD(noeud *newnoeud, noeud *arbre, int numNoeud)
 
 void    afficher(char c)
 {
-    static int nb;
-
-    if (nb == 0)
-        printf("%c", c);
-    else
-        printf(", %c", c);
+    printf("%c ", c);
 }
 
 void    parcoursPrefixe(noeud *n)
 {
     if (n == NULL)
         return;
-    printf("%c", n->etiquette);
+    afficher(n->etiquette);
     parcoursPrefixe(n->filsG);
     parcoursPrefixe(n->filsD);
 }

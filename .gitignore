@@ -138,4 +138,8 @@ Temporary Items
 #Document trop volumineux
 corrections_td_tp.docx
 
+#pictures
+*.png
+*.jpeg
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,emacs,c
