@@ -136,7 +136,7 @@ Temporary Items
 .apdisk
 
 #Document trop volumineux
-corrections_td_tp.docx
+*.docx
 
 #pictures
 *.png

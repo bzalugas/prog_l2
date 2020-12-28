@@ -7,6 +7,7 @@ int main(void)
 {
   int nb, i;
   float *ptrMax=NULL, *ptrMin=NULL, *ptr;
+
   do
     {
       printf("Nb de valeurs réelles à saisir ? ");

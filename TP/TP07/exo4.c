@@ -6,7 +6,7 @@
 
 char    *read_str(void)
 {
-    char buf[31];
+    char buf[LEN];
     char *str;
     int length;
 
