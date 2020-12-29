@@ -1,4 +1,4 @@
-//tp11_exo1.c
+//tp11.c
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -136,32 +136,32 @@ void        menu(void)
     cellule *liste;
     do {
         printf("creer liste : C\n");
-        printf("inserer cellule : i\n");
-        printf("supprimer cellule : s\n");
-        printf("afficher liste : a\n");
-        printf("Quitter: q\n");
+        printf("inserer cellule : I\n");
+        printf("supprimer cellule : S\n");
+        printf("afficher liste : A\n");
+        printf("Quitter: Q\n");
         fflush(stdin);
         scanf("%c", &c);
         switch (c) {
-        case 'c':
+        case 'c':case 'C':
             if (liste == NULL)
                 liste = create();
             else
                 printf("liste deja cree.\n");
             break;
-        case 'i':
+        case 'i':case 'I':
             if (liste != NULL)
                 insert(liste);
             else
                 printf("liste pas encore cree.\n");
             break;
-        case 's':
+        case 's':case 'S':
             if (liste != NULL)
                 supp(liste);
             else
                 printf("Liste vide, rien a supprimer.\n");
             break;
-        case 'a':
+        case 'a':case 'A':
             if (liste != NULL)
                 afficher(liste);
             else
